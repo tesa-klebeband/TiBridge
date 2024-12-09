@@ -1,0 +1,729 @@
+/*
+ * This file is part of TiBridge (https://github.com/tesa-klebeband/TiBridge).
+ * Copyright (c) 2024 tesa-klebeband.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+#ifndef TI_TOKEN_H
+#define TI_TOKEN_H
+
+#define TOKEN_EOSSTART 0x00
+#define TOKEN_DCONV 0x01
+#define TOKEN_TO_DMS TOKEN_DCONV
+#define TOKEN_TO_DEC (TOKEN_DCONV + 0x01)
+#define TOKEN_TO_ABC (TOKEN_DCONV + 0x02)
+#define TOKEN_STORE (TOKEN_DCONV + 0x03)
+#define TOKEN_BOX_PLOT 0x05
+#define TOKEN_BRACKS 0x06
+#define TOKEN_LBRACK TOKEN_BRACKS
+#define TOKEN_RBRACK (TOKEN_BRACKS + 0x01)
+#define TOKEN_LBRACE (TOKEN_BRACKS + 0x02)
+#define TOKEN_RBRACE (TOKEN_BRACKS + 0x03)
+#define TOKEN_POST1 (TOKEN_BRACKS + 0x04)
+#define TOKEN_FROM_RAD TOKEN_POST1
+#define TOKEN_FROM_DEG (TOKEN_POST1 + 0x01)
+#define TOKEN_RECIP (TOKEN_POST1 + 0x02)
+#define TOKEN_SQR (TOKEN_POST1 + 0x03)
+#define TOKEN_TRNSPOS (TOKEN_POST1 + 0x04)
+#define TOKEN_CUBE (TOKEN_POST1 + 0x05)
+#define TOKEN_LPAREN 0x10
+#define TOKEN_RPAREN 0x11
+#define TOKEN_IMUN 0x12
+#define TOKEN_ROUND TOKEN_IMUN
+#define TOKEN_PX_TST (TOKEN_IMUN + 0x01)
+#define TOKEN_AUG (TOKEN_IMUN + 0x02)
+#define TOKEN_ROW_SWAP (TOKEN_IMUN + 0x03)
+#define TOKEN_ROW_PLUS (TOKEN_IMUN + 0x04)
+#define TOKEN_M_ROW (TOKEN_IMUN + 0x05)
+#define TOKEN_M_ROW_PLUS (TOKEN_IMUN + 0x06)
+#define TOKEN_MAX (TOKEN_IMUN + 0x07)
+#define TOKEN_MIN (TOKEN_IMUN + 0x08)
+#define TOKEN_R_TO_PR (TOKEN_IMUN + 0x09)
+#define TOKEN_R_TO_PO (TOKEN_IMUN + 0x0A)
+#define TOKEN_P_TO_RX (TOKEN_IMUN + 0x0B)
+#define TOKEN_P_TO_RY (TOKEN_IMUN + 0x0C)
+#define TOKEN_MEDIAN (TOKEN_IMUN + 0x0D)
+#define TOKEN_RAND_M (TOKEN_IMUN + 0x0E)
+#define TOKEN_MEAN (TOKEN_IMUN + 0x0F)
+#define TOKEN_ROOT (TOKEN_IMUN + 0x10)
+#define TOKEN_SERIES (TOKEN_IMUN + 0x11)
+#define TOKEN_FN_INT (TOKEN_IMUN + 0x12)
+#define TOKEN_N_DERIV (TOKEN_IMUN + 0x13)
+#define TOKEN_EVAL_F (TOKEN_IMUN + 0x14)
+#define TOKEN_FMIN (TOKEN_IMUN + 0x15)
+#define TOKEN_FMAX (TOKEN_IMUN + 0x16)
+#define TOKEN_EOSEL (TOKEN_IMUN + 0x17)
+#define TOKEN_SPACE TOKEN_EOSEL
+#define TOKEN_STRING (TOKEN_EOSEL + 0x01)
+#define TOKEN_COMMA (TOKEN_EOSEL + 0x02)
+#define TOKEN_II 0x2C
+#define TOKEN_POST 0x2D
+#define TOKEN_FACT TOKEN_POST
+#define TOKEN_CUBIC_R 0x2E
+#define TOKEN_QUART_R 0x2F
+#define TOKEN_NUMS 0x30
+#define TOKEN_0 TOKEN_NUMS
+#define TOKEN_1 (TOKEN_NUMS + 0x01)
+#define TOKEN_2 (TOKEN_NUMS + 0x02)
+#define TOKEN_3 (TOKEN_NUMS + 0x03)
+#define TOKEN_4 (TOKEN_NUMS + 0x04)
+#define TOKEN_5 (TOKEN_NUMS + 0x05)
+#define TOKEN_6 (TOKEN_NUMS + 0x06)
+#define TOKEN_7 (TOKEN_NUMS + 0x07)
+#define TOKEN_8 (TOKEN_NUMS + 0x08)
+#define TOKEN_9 (TOKEN_NUMS + 0x09)
+#define TOKEN_DEC_PT (TOKEN_NUMS + 0x0A)
+#define TOKEN_EE (TOKEN_NUMS + 0x0B)
+#define TOKEN_OR 0x3C
+#define TOKEN_XOR 0x3D
+#define TOKEN_COLON 0x3E
+#define TOKEN_ENTER 0x3F
+#define TOKEN_AND 0x40
+#define TOKEN_LET 0x41
+#define TOKEN_A TOKEN_LET
+#define TOKEN_B (TOKEN_LET + 0x01)
+#define TOKEN_C (TOKEN_LET + 0x02)
+#define TOKEN_D (TOKEN_LET + 0x03)
+#define TOKEN_E (TOKEN_LET + 0x04)
+#define TOKEN_F (TOKEN_LET + 0x05)
+#define TOKEN_G (TOKEN_LET + 0x06)
+#define TOKEN_H (TOKEN_LET + 0x07)
+#define TOKEN_I (TOKEN_LET + 0x08)
+#define TOKEN_J (TOKEN_LET + 0x09)
+#define TOKEN_K (TOKEN_LET + 0x0A)
+#define TOKEN_L (TOKEN_LET + 0x0B)
+#define TOKEN_M (TOKEN_LET + 0x0C)
+#define TOKEN_N (TOKEN_LET + 0x0D)
+#define TOKEN_O (TOKEN_LET + 0x0E)
+#define TOKEN_P (TOKEN_LET + 0x0F)
+#define TOKEN_Q (TOKEN_LET + 0x10)
+#define TOKEN_R (TOKEN_LET + 0x11)
+#define TOKEN_S (TOKEN_LET + 0x12)
+#define TOKEN_T (TOKEN_LET + 0x13)
+#define TOKEN_U (TOKEN_LET + 0x14)
+#define TOKEN_V (TOKEN_LET + 0x15)
+#define TOKEN_W (TOKEN_LET + 0x16)
+#define TOKEN_X (TOKEN_LET + 0x17)
+#define TOKEN_Y (TOKEN_LET + 0x18)
+#define TOKEN_Z (TOKEN_LET + 0x19)
+#define TOKEN_THETA (TOKEN_LET + 0x1A)
+#define VTOKS (TOKEN_LET + 0x1B)
+#define TOKEN_VAR_MAT VTOKS
+#define TOKEN_VAR_LST (VTOKS + 0x01)
+#define TOKEN_VAR_EQU (VTOKS + 0x02)
+#define TOKEN_PROG (VTOKS + 0x03)
+#define TOKEN_VAR_PICT (VTOKS + 0x04)
+#define TOKEN_VAR_GDB (VTOKS + 0x05)
+#define TOKEN_VAR_OUT (VTOKS + 0x06)
+#define TOKEN_VAR_SYS (VTOKS + 0x07)
+#define MODESA (VTOKS + 0x08)
+#define TOKEN_RAD MODESA
+#define TOKEN_DEG (MODESA + 0x01)
+#define TOKEN_NORMF (MODESA + 0x02)
+#define TOKEN_SCI (MODESA + 0x03)
+#define TOKEN_ENG (MODESA + 0x04)
+#define TOKEN_FLOAT (MODESA + 0x05)
+#define CMPS 0x6A
+#define TOKEN_EQ CMPS
+#define TOKEN_LT (CMPS + 0x01)
+#define TOKEN_GT (CMPS + 0x02)
+#define TOKEN_LE (CMPS + 0x03)
+#define TOKEN_GE (CMPS + 0x04)
+#define TOKEN_NE (CMPS + 0x05)
+#define TOKEN_ADD 0x70
+#define TOKEN_SUB 0x71
+#define TOKEN_ANS 0x72
+#define MODES 0x73
+#define TOKEN_FIX MODES
+#define TOKEN_SPLIT_ON (MODES + 0x01)
+#define TOKEN_FULL_SCREEN (MODES + 0x02)
+#define TOKEN_STNDRD (MODES + 0x03)
+#define TOKEN_PARAM (MODES + 0x04)
+#define TOKEN_POLAR (MODES + 0x05)
+#define TOKEN_SEQG (MODES + 0x06)
+#define TOKEN_AFILL_ON (MODES + 0x07)
+#define TOKEN_AFILL_OFF (MODES + 0x08)
+#define TOKEN_ACALC_ON (MODES + 0x09)
+#define TOKEN_ACALC_OFF (MODES + 0x0A)
+#define TOKEN_GFORMAT (MODES + 0x0B)
+#define TOKEN_BOX_ICON 0x7F
+#define TOKEN_CROSS_ICON 0x80
+#define TOKEN_DOT_ICON 0x81
+#define TOKEN_MUL 0x82
+#define TOKEN_DIV 0x83
+#define GRCMDS 0x84
+#define TOKEN_TRACE GRCMDS
+#define TOKEN_CLDRW (GRCMDS + 0x01)
+#define TOKEN_ZOOM_STD (GRCMDS + 0x02)
+#define TOKEN_ZOOM_TRG (GRCMDS + 0x03)
+#define TOKEN_ZOOM_BOX (GRCMDS + 0x04)
+#define TOKEN_ZOOM_IN (GRCMDS + 0x05)
+#define TOKEN_ZOOM_OUT (GRCMDS + 0x06)
+#define TOKEN_ZOOM_SQR (GRCMDS + 0x07)
+#define TOKEN_ZOOM_INT (GRCMDS + 0x08)
+#define TOKEN_ZOOM_PREV (GRCMDS + 0x09)
+#define TOKEN_ZOOM_DEC (GRCMDS + 0x0A)
+#define TOKEN_ZOOM_STAT (GRCMDS + 0x0B)
+#define TOKEN_USR_ZM (GRCMDS + 0x0C)
+#define TOKEN_PRT_SCRN (GRCMDS + 0x0D)
+#define TOKEN_ZOOM_STO (GRCMDS + 0x0E)
+#define TOKEN_TEXT (GRCMDS + 0x0F)
+#define TOKEN_NPR (GRCMDS + 0x10)
+#define TOKEN_NCR (GRCMDS + 0x11)
+#define TOKEN_Y_ON (GRCMDS + 0x12)
+#define TOKEN_Y_OFF (GRCMDS + 0x13)
+#define TOKEN_ST_PIC (GRCMDS + 0x14)
+#define TOKEN_RC_PIC (GRCMDS + 0x15)
+#define TOKEN_STO_DB (GRCMDS + 0x16)
+#define TOKEN_RCL_DB (GRCMDS + 0x17)
+#define TOKEN_LINE (GRCMDS + 0x18)
+#define TOKEN_VERT (GRCMDS + 0x19)
+#define TOKEN_PT_ON (GRCMDS + 0x1A)
+#define TOKEN_PT_OFF (GRCMDS + 0x1B)
+#define TOKEN_PT_CHG (GRCMDS + 0x1C)
+#define TOKEN_PX_ON (GRCMDS + 0x1D)
+#define TOKEN_PX_OFF (GRCMDS + 0x1E)
+#define TOKEN_PX_CHG (GRCMDS + 0x1F)
+#define TOKEN_SHADE (GRCMDS + 0x20)
+#define TOKEN_CIRCL (GRCMDS + 0x21)
+#define TOKEN_HORZ (GRCMDS + 0x22)
+#define TOKEN_TANLN (GRCMDS + 0x23)
+#define TOKEN_DR_INV (GRCMDS + 0x24)
+#define TOKEN_DRAW_F (GRCMDS + 0x25)
+#define TOKEN_VAR_STRNG 0xAA
+#define NOARG 0xAB
+#define TOKEN_RAND NOARG
+#define TOKEN_PI (NOARG + 0x01)
+#define TOKEN_GET_KEY (NOARG + 0x02)
+#define TOKEN_APOST (TOKEN_GET_KEY + 0x01)
+#define TOKEN_QUEST (TOKEN_APOST + 0x01)
+#define UNARY (TOKEN_QUEST + 0x01)
+#define TOKEN_CHS UNARY
+#define TOKEN_INT (UNARY + 0x01)
+#define TOKEN_ABS (UNARY + 0x02)
+#define TOKEN_DET (UNARY + 0x03)
+#define TOKEN_IDENT (UNARY + 0x04)
+#define TOKEN_DIM (UNARY + 0x05)
+#define TOKEN_SUM (UNARY + 0x06)
+#define TOKEN_PROD (UNARY + 0x07)
+#define TOKEN_NOT (UNARY + 0x08)
+#define TOKEN_I_PART (UNARY + 0x09)
+#define TOKEN_F_PART (UNARY + 0x0A)
+#define TOKEN_2_BYTE_TOK 0xBB
+#define UNARYLR (UNARY + 0x0C)
+#define TOKEN_SQRT UNARYLR
+#define TOKEN_CUB_RT (UNARYLR + 0x01)
+#define TOKEN_LN (UNARYLR + 0x02)
+#define TOKEN_EXP (UNARYLR + 0x03)
+#define TOKEN_LOG (UNARYLR + 0x04)
+#define TOKEN_A_LOG (UNARYLR + 0x05)
+#define TOKEN_SIN (UNARYLR + 0x06)
+#define TOKEN_A_SIN (UNARYLR + 0x07)
+#define TOKEN_COS (UNARYLR + 0x08)
+#define TOKEN_A_COS (UNARYLR + 0x09)
+#define TOKEN_TAN (UNARYLR + 0x0A)
+#define TOKEN_A_TAN (UNARYLR + 0x0B)
+#define TOKEN_SIN_H (UNARYLR + 0x0C)
+#define TOKEN_A_SIN_H (UNARYLR + 0x0D)
+#define TOKEN_COS_H (UNARYLR + 0x0E)
+#define TOKEN_A_COS_H (UNARYLR + 0x0F)
+#define TOKEN_TAN_H (UNARYLR + 0x10)
+#define TOKEN_A_TAN_H (UNARYLR + 0x11)
+#define PROGTOK (UNARYLR + 0x12)
+#define TOKEN_IF PROGTOK
+#define TOKEN_THEN (PROGTOK + 0x01)
+#define TOKEN_ELSE (PROGTOK + 0x02)
+#define TOKEN_WHILE (PROGTOK + 0x03)
+#define TOKEN_REPEAT (PROGTOK + 0x04)
+#define TOKEN_FOR (PROGTOK + 0x05)
+#define TOKEN_END (PROGTOK + 0x06)
+#define TOKEN_RETURN (PROGTOK + 0x07)
+#define TOKEN_LBL (PROGTOK + 0x08)
+#define TOKEN_GOTO (PROGTOK + 0x09)
+#define TOKEN_PAUSE (PROGTOK + 0x0A)
+#define TOKEN_STOP (PROGTOK + 0x0B)
+#define TOKEN_ISG (PROGTOK + 0x0C)
+#define TOKEN_DSL (PROGTOK + 0x0D)
+#define TOKEN_INPUT (PROGTOK + 0x0E)
+#define TOKEN_PROMPT (PROGTOK + 0x0F)
+#define TOKEN_DISP (PROGTOK + 0x10)
+#define TOKEN_DISP_G (PROGTOK + 0x11)
+#define TOKEN_OUTPUT (PROGTOK + 0x12)
+#define TOKEN_CL_LCD (PROGTOK + 0x13)
+#define TOKEN_CONST (PROGTOK + 0x14)
+#define TOKEN_SORT_A (PROGTOK + 0x15)
+#define TOKEN_SORT_D (PROGTOK + 0x16)
+#define TOKEN_DISP_TAB (PROGTOK + 0x17)
+#define TOKEN_MENU (PROGTOK + 0x18)
+#define TOKEN_SEND_MBL (PROGTOK + 0x19)
+#define TOKEN_GET_MBL (PROGTOK + 0x1A)
+#define STATP_CMD (PROGTOK + 0x1B)
+#define TOKEN_PLOT_ON STATP_CMD
+#define TOKEN_PLOT_OFF (STATP_CMD + 0x01)
+#define TOKEN_LIST_NAME 0xEB
+#define TOKEN_PLOT_1 0xEC
+#define TOKEN_PLOT_2 0xED
+#define TOKEN_PLOT_3 0xEE
+#define TOKEN_UNUSED_01 0xEF
+#define TOKEN_POWER 0xF0
+#define TOKEN_X_ROOT 0xF1
+#define STATCMD 0xF2
+#define TOKEN_ONE_VAR STATCMD
+#define TOKEN_TWO_VAR (STATCMD + 0x01)
+#define TOKEN_LR (STATCMD + 0x02)
+#define TOKEN_LR_EXP (STATCMD + 0x03)
+#define TOKEN_LR_LN (STATCMD + 0x04)
+#define TOKEN_LR_PWR (STATCMD + 0x05)
+#define TOKEN_MED_MED (STATCMD + 0x06)
+#define TOKEN_QUAD (STATCMD + 0x07)
+#define TOKEN_CLR_LST (STATCMD + 0x08)
+#define TOKEN_CLR_TBL (STATCMD + 0x09)
+#define TOKEN_HIST (STATCMD + 0x0A)
+#define TOKEN_XY_LINE (STATCMD + 0x0B)
+#define TOKEN_SCATTER (STATCMD + 0x0C)
+#define TOKEN_LR_1 (STATCMD + 0x0D)
+#define GFMT 0x00
+#define TOKEN_SEQ GFMT
+#define TOKEN_SIMUL_G (GFMT + 0x01)
+#define TOKEN_POLAR_G (GFMT + 0x02)
+#define TOKEN_RECT_G (GFMT + 0x03)
+#define TOKEN_COORD_ON (GFMT + 0x04)
+#define TOKEN_COORD_OFF (GFMT + 0x05)
+#define TOKEN_DRAW_LINE (GFMT + 0x06)
+#define TOKEN_DRAW_DOT (GFMT + 0x07)
+#define TOKEN_AXIS_ON (GFMT + 0x08)
+#define TOKEN_AXIS_OFF (GFMT + 0x09)
+#define TOKEN_GRID_ON (GFMT + 0x0A)
+#define TOKEN_GRID_OFF (GFMT + 0x0B)
+#define TOKEN_LBL_ON (GFMT + 0x0C)
+#define TOKEN_LBL_OFF (GFMT + 0x0D)
+#define TOKEN_WEB_ON (GFMT + 0x0E)
+#define TOKEN_WEB_OFF (GFMT + 0x0F)
+#define TOKEN_UV (GFMT + 0x10)
+#define TOKEN_VW (GFMT + 0x11)
+#define TOKEN_UW (GFMT + 0x12)
+#define TOKEN_MAT_A 0x00
+#define TOKEN_MAT_B 0x01
+#define TOKEN_MAT_C 0x02
+#define TOKEN_MAT_D 0x03
+#define TOKEN_MAT_E 0x04
+#define TOKEN_MAT_F 0x05
+#define TOKEN_MAT_G 0x06
+#define TOKEN_MAT_H 0x07
+#define TOKEN_MAT_I 0x08
+#define TOKEN_MAT_J 0x09
+#define TOKEN_L1 0x00
+#define TOKEN_L2 0x01
+#define TOKEN_L3 0x02
+#define TOKEN_L4 0x03
+#define TOKEN_L5 0x04
+#define TOKEN_L6 0x05
+#define TOKEN_Y1 0x10
+#define TOKEN_Y2 0x11
+#define TOKEN_Y3 0x12
+#define TOKEN_Y4 0x13
+#define TOKEN_Y5 0x14
+#define TOKEN_Y6 0x15
+#define TOKEN_Y7 0x16
+#define TOKEN_Y8 0x17
+#define TOKEN_Y9 0x18
+#define TOKEN_Y0 0x19
+#define TOKEN_X1T 0x20
+#define TOKEN_Y1T 0x21
+#define TOKEN_X2T 0x22
+#define TOKEN_Y2T 0x23
+#define TOKEN_X3T 0x24
+#define TOKEN_Y3T 0x25
+#define TOKEN_X4T 0x26
+#define TOKEN_Y4T 0x27
+#define TOKEN_X5T 0x28
+#define TOKEN_Y5T 0x29
+#define TOKEN_X6T 0x2A
+#define TOKEN_Y6T 0x2B
+#define TOKEN_R1 0x40
+#define TOKEN_R2 0x41
+#define TOKEN_R3 0x42
+#define TOKEN_R4 0x43
+#define TOKEN_R5 0x44
+#define TOKEN_R6 0x45
+#define TOKEN_UN 0x80
+#define TOKEN_VN 0x81
+#define TOKEN_WN 0x82
+#define TOKEN_PIC1 0x00
+#define TOKEN_PIC2 0x01
+#define TOKEN_PIC3 0x02
+#define TOKEN_PIC4 0x03
+#define TOKEN_PIC5 0x04
+#define TOKEN_PIC6 0x05
+#define TOKEN_PIC7 0x06
+#define TOKEN_PIC8 0x07
+#define TOKEN_PIC9 0x08
+#define TOKEN_PIC0 0x09
+#define TOKEN_GDB1 0x00
+#define TOKEN_GDB2 0x01
+#define TOKEN_GDB3 0x02
+#define TOKEN_GDB4 0x03
+#define TOKEN_GDB5 0x04
+#define TOKEN_GDB6 0x05
+#define TOKEN_GDB7 0x06
+#define TOKEN_GDB8 0x07
+#define TOKEN_GDB9 0x08
+#define TOKEN_GDB0 0x09
+#define TOKEN_STR1 0x00
+#define TOKEN_STR2 0x01
+#define TOKEN_STR3 0x02
+#define TOKEN_STR4 0x03
+#define TOKEN_STR5 0x04
+#define TOKEN_STR6 0x05
+#define TOKEN_STR7 0x06
+#define TOKEN_STR8 0x07
+#define TOKEN_STR9 0x08
+#define TOKEN_STR0 0x09
+#define TOKEN_OPEN 0x00
+#define TOKEN_REG_EQ 0x01
+#define TOKEN_STAT_N 0x02
+#define TOKEN_X_MEAN 0x03
+#define TOKEN_SUM_X 0x04
+#define TOKEN_SUM_X_SQR 0x05
+#define TOKEN_STD_X 0x06
+#define TOKEN_STD_PX 0x07
+#define TOKEN_MIN_X 0x08
+#define TOKEN_MAX_X 0x09
+#define TOKEN_MIN_Y 0x0A
+#define TOKEN_MAX_Y 0x0B
+#define TOKEN_Y_MEAN 0x0C
+#define TOKEN_SUM_Y 0x0D
+#define TOKEN_SUM_Y_SQR 0x0E
+#define TOKEN_STD_Y 0x0F
+#define TOKEN_STD_PY 0x10
+#define TOKEN_SUM_XY 0x11
+#define TOKEN_CORR 0x12
+#define TOKEN_MED_X 0x13
+#define TOKEN_Q1 0x14
+#define TOKEN_Q3 0x15
+#define TOKEN_QUAD_A 0x16
+#define TOKEN_QUAD_B 0x17
+#define TOKEN_QUAD_C 0x18
+#define TOKEN_CUBE_D 0x19
+#define TOKEN_QUART_E 0x1A
+#define TOKEN_MED_X1 0x1B
+#define TOKEN_MED_X2 0x1C
+#define TOKEN_MED_X3 0x1D
+#define TOKEN_MED_Y1 0x1E
+#define TOKEN_MED_Y2 0x1F
+#define TOKEN_MED_Y3 0x20
+#define TOKEN_RECURN 0x21
+#define TOKEN_STAT_P 0x22
+#define TOKEN_STAT_Z 0x23
+#define TOKEN_STAT_T 0x24
+#define TOKEN_STAT_CHI 0x25
+#define TOKEN_STAT_F 0x26
+#define TOKEN_STAT_DF 0x27
+#define TOKEN_STAT_PHAT 0x28
+#define TOKEN_STAT_PHAT1 0x29
+#define TOKEN_STAT_PHAT2 0x2A
+#define TOKEN_STAT_MEAN_X1 0x2B
+#define TOKEN_STAT_STD_X1 0x2C
+#define TOKEN_STAT_N1 0x2D
+#define TOKEN_STAT_MEAN_X2 0x2E
+#define TOKEN_STAT_STD_X2 0x2F
+#define TOKEN_STAT_N2 0x30
+#define TOKEN_STAT_STD_XP 0x31
+#define TOKEN_STAT_LOWER 0x32
+#define TOKEN_STAT_UPPER 0x33
+#define TOKEN_STAT_S 0x34
+#define TOKEN_LR_SQR 0x35
+#define TOKEN_BR_SQR 0x36
+#define TOKEN_F_DF 0x37
+#define TOKEN_F_SS 0x38
+#define TOKEN_F_MS 0x39
+#define TOKEN_E_DF 0x3A
+#define TOKEN_E_SS 0x3B
+#define TOKEN_E_MS 0x3C
+#define TOKEN_U_XSCL 0x00
+#define TOKEN_U_YSCL 0x01
+#define TOKEN_XSCL 0x02
+#define TOKEN_YSCL 0x03
+#define TOKEN_RECURU0 0x04
+#define TOKEN_RECURV0 0x05
+#define TOKEN_U_N1 0x06
+#define TOKEN_V_N1 0x07
+#define TOKEN_U_RECURU0 0x08
+#define TOKEN_U_RECURV0 0x09
+#define TOKEN_X_MIN 0x0A
+#define TOKEN_X_MAX 0x0B
+#define TOKEN_Y_MIN 0x0C
+#define TOKEN_Y_MAX 0x0D
+#define TOKEN_T_MIN 0x0E
+#define TOKEN_T_MAX 0x0F
+#define TOKEN_THETA_MIN 0x10
+#define TOKEN_THETA_MAX 0x11
+#define TOKEN_U_X_MIN 0x12
+#define TOKEN_U_X_MAX 0x13
+#define TOKEN_U_Y_MIN 0x14
+#define TOKEN_U_Y_MAX 0x15
+#define TOKEN_U_THET_MIN 0x16
+#define TOKEN_U_THET_MAX 0x17
+#define TOKEN_U_T_MIN 0x18
+#define TOKEN_U_T_MAX 0x19
+#define TOKEN_TBL_MIN 0x1A
+#define TOKEN_PLOT_START 0x1B
+#define TOKEN_U_PLOT_START 0x1C
+#define TOKEN_N_MAX 0x1D
+#define TOKEN_U_N_MAX 0x1E
+#define TOKEN_N_MIN 0x1F
+#define TOKEN_U_N_MIN 0x20
+#define TOKEN_TBL_STEP 0x21
+#define TOKEN_T_STEP 0x22
+#define TOKEN_THETA_STEP 0x23
+#define TOKEN_U_T_STEP 0x24
+#define TOKEN_U_THET_STEP 0x25
+#define TOKEN_DELTA_X 0x26
+#define TOKEN_DELTA_Y 0x27
+#define TOKEN_X_FACT 0x28
+#define TOKEN_Y_FACT 0x29
+#define TOKEN_TBL_INPUT 0x2A
+#define TOKEN_FIN_N 0x2B
+#define TOKEN_FIN_I 0x2C
+#define TOKEN_FIN_PV 0x2D
+#define TOKEN_FIN_PMT 0x2E
+#define TOKEN_FIN_FV 0x2F
+#define TOKEN_FIN_PY 0x30
+#define TOKEN_FIN_CY 0x31
+#define TOKEN_RECURW0 0x32
+#define TOKEN_U_RECURW0 0x33
+#define TOKEN_PLOT_STEP 0x34
+#define TOKEN_U_PLOT_STEP 0x35
+#define TOKEN_X_RES 0x36
+#define TOKEN_U_X_RES 0x37
+#define TOKEN_RECURU02 0x38
+#define TOKEN_U_RECURU02 0x39
+#define TOKEN_RECURV02 0x3C
+#define TOKEN_U_RECURV02 0x3D
+#define TOKEN_RECURW02 0x3E
+#define TOKEN_U_RECURW02 0x3F
+#define TOKEN_FIN_NPV 0x00
+#define TOKEN_FIN_IRR 0x01
+#define TOKEN_FIN_BAL 0x02
+#define TOKEN_FIN_PRN 0x03
+#define TOKEN_FIN_INT 0x04
+#define TOKEN_FIN_TO_NOM 0x05
+#define TOKEN_FIN_TO_EFF 0x06
+#define TOKEN_FIN_DBD 0x07
+#define TOKEN_LCM 0x08
+#define TOKEN_GCD 0x09
+#define TOKEN_RAND_INT 0x0A
+#define TOKEN_RAND_BIN 0x0B
+#define TOKEN_SUB_STRNG 0x0C
+#define TOKEN_STD_DEV 0x0D
+#define TOKEN_VARIANCE 0x0E
+#define TOKEN_IN_STRNG 0x0F
+#define TOKEN_D_NORMAL 0x10
+#define TOKEN_INV_NORM 0x11
+#define TOKEN_DT 0x12
+#define TOKEN_CHI 0x13
+#define TOKEN_DF 0x14
+#define TOKEN_BIN_PDF 0x15
+#define TOKEN_BIN_CDF 0x16
+#define TOKEN_POI_PDF 0x17
+#define TOKEN_POI_CDF 0x18
+#define TOKEN_GEO_PDF 0x19
+#define TOKEN_GEO_CDF 0x1A
+#define TOKEN_NORMAL_PDF 0x1B
+#define TOKEN_T_PDF 0x1C
+#define TOKEN_CHI_PDF 0x1D
+#define TOKEN_F_PDF 0x1E
+#define TOKEN_RAND_NORM 0x1F
+#define TOKEN_FIN_FPMT 0x20
+#define TOKEN_FIN_FI 0x21
+#define TOKEN_FIN_FPV 0x22
+#define TOKEN_FIN_FN 0x23
+#define TOKEN_FIN_FFV 0x24
+#define TOKEN_CONJ 0x25
+#define TOKEN_REAL 0x26
+#define TOKEN_IMAG 0x27
+#define TOKEN_ANGLE 0x28
+#define TOKEN_CUM_SUM 0x29
+#define TOKEN_EXPR 0x2A
+#define TOKEN_LENGTH 0x2B
+#define TOKEN_DELTA_LST 0x2C
+#define TOKEN_REF 0x2D
+#define TOKEN_R_REF 0x2E
+#define TOKEN_TO_RECT 0x2F
+#define TOKEN_TO_POLAR 0x30
+#define TOKEN_CONST_E 0x31
+#define TOKEN_SIN_REG 0x32
+#define TOKEN_LOGISTIC 0x33
+#define TOKEN_LIN_REG_T_TEST 0x34
+#define TOKEN_SHADE_NORM 0x35
+#define TOKEN_SHADE_T 0x36
+#define TOKEN_SHADE_CHI 0x37
+#define TOKEN_SHADE_F 0x38
+#define TOKEN_MAT_TO_LST 0x39
+#define TOKEN_LST_TO_MAT 0x3A
+#define TOKEN_Z_TEST 0x3B
+#define TOKEN_T_TEST 0x3C
+#define TOKEN_2_SAMP_Z_TEST 0x3D
+#define TOKEN_1_PROP_Z_TEST 0x3E
+#define TOKEN_2_PROP_Z_TEST 0x3F
+#define TOKEN_CHI_TEST 0x40
+#define TOKEN_Z_INT_VAL 0x41
+#define TOKEN_2_SAMP_Z_INT 0x42
+#define TOKEN_1_PROP_Z_INT 0x43
+#define TOKEN_2_PROP_Z_INT 0x44
+#define TOKEN_GRAPH_STYLE 0x45
+#define TOKEN_2_SAMP_T_TEST 0x46
+#define TOKEN_2_SAMP_F_TEST 0x47
+#define TOKEN_T_INT_VAL 0x48
+#define TOKEN_2_SAMP_T_INT 0x49
+#define TOKEN_SETUP_LST 0x4A
+#define TOKEN_FIN_PMT_END 0x4B
+#define TOKEN_FIN_PMT_BEG 0x4C
+#define TOKEN_REAL_M 0x4D
+#define TOKEN_POLAR_M 0x4E
+#define TOKEN_RECT_M 0x4F
+#define TOKEN_EXPR_ON 0x50
+#define TOKEN_EXPR_OFF 0x51
+#define TOKEN_CLR_ALL_LST 0x52
+#define TOKEN_GET_CALC 0x53
+#define TOKEN_DEL_VAR 0x54
+#define TOKEN_EQU_TO_STRNG 0x55
+#define TOKEN_STRNG_TO_EQU 0x56
+#define TOKEN_DEL_LAST 0x57
+#define TOKEN_SELECT 0x58
+#define TOKEN_ANOVA 0x59
+#define TOKEN_MOD_BOX 0x5A
+#define TOKEN_NORM_PROB 0x5B
+#define TOKEN_MGT 0x64
+#define TOKEN_Z_FIT 0x65
+#define TOKEN_DIAG_ON 0x66
+#define TOKEN_DIAG_OFF 0x67
+#define TOKEN_OK_END_2V0 0x67
+#define TOKEN_ARCHIVE 0x68
+#define TOKEN_UNARCHIVE 0x69
+#define TOKEN_ASM 0x6A
+#define TOKEN_ASM_COMP 0x6B
+#define TOKEN_ASM_PRGM 0x6C
+#define TOKEN_ASM_CMP 0x6D
+#define TOKEN_LCAP_A_ACUTE 0x6E
+#define TOKEN_LCAP_A_GRAVE 0x6F
+#define TOKEN_LCAP_A_CARET 0x70
+#define TOKEN_LCAP_A_DIER 0x71
+#define TOKEN_LA_ACUTE 0x72
+#define TOKEN_LA_GRAVE 0x73
+#define TOKEN_LA_CARET 0x74
+#define TOKEN_LA_DIER 0x75
+#define TOKEN_LCAP_E_ACUTE 0x76
+#define TOKEN_LCAP_E_GRAVE 0x77
+#define TOKEN_LCAP_E_CARET 0x78
+#define TOKEN_LCAP_E_DIER 0x79
+#define TOKEN_LE_ACUTE 0x7A
+#define TOKEN_LE_GRAVE 0x7B
+#define TOKEN_LE_CARET 0x7C
+#define TOKEN_LE_DIER 0x7D
+#define TOKEN_LCAP_I_GRAVE 0x7F
+#define TOKEN_LCAP_I_CARET 0x80
+#define TOKEN_LCAP_I_DIER 0x81
+#define TOKEN_LI_ACUTE 0x82
+#define TOKEN_LI_GRAVE 0x83
+#define TOKEN_LI_CARET 0x84
+#define TOKEN_LI_DIER 0x85
+#define TOKEN_LCAP_O_ACUTE 0x86
+#define TOKEN_LCAP_O_GRAVE 0x87
+#define TOKEN_LCAP_O_CARET 0x88
+#define TOKEN_LCAP_O_DIER 0x89
+#define TOKEN_LO_ACUTE 0x8A
+#define TOKEN_LO_GRAVE 0x8B
+#define TOKEN_LO_CARET 0x8C
+#define TOKEN_LO_DIER 0x8D
+#define TOKEN_LCAP_U_ACUTE 0x8E
+#define TOKEN_LCAP_U_GRAVE 0x8F
+#define TOKEN_LCAP_U_CARET 0x90
+#define TOKEN_LCAP_U_DIER 0x91
+#define TOKEN_LU_ACUTE 0x92
+#define TOKEN_LU_GRAVE 0x93
+#define TOKEN_LU_CARET 0x94
+#define TOKEN_LU_DIER 0x95
+#define TOKEN_LCAP_C_CED 0x96
+#define TOKEN_LC_CED 0x97
+#define TOKEN_LCAP_N_TILDE 0x98
+#define TOKEN_LN_TILDE 0x99
+#define TOKEN_L_ACCENT 0x9A
+#define TOKEN_L_GRAVE 0x9B
+#define TOKEN_L_DIERESIS 0x9C
+#define TOKEN_L_QUES_DOWN 0x9D
+#define TOKEN_L_EXCLAM_DOWN 0x9E
+#define TOKEN_L_ALPHA 0x9F
+#define TOKEN_L_BETA 0xA0
+#define TOKEN_L_GAMMA 0xA1
+#define TOKEN_LCAP_DELTA 0xA2
+#define TOKEN_L_DELTA 0xA3
+#define TOKEN_L_EPSILON 0xA4
+#define TOKEN_L_LAMBDA 0xA5
+#define TOKEN_L_MU 0xA6
+#define TOKEN_L_PI 0xA7
+#define TOKEN_L_RHO 0xA8
+#define TOKEN_LCAP_SIGMA 0xA9
+#define TOKEN_L_PHI 0xAB
+#define TOKEN_LCAP_OMEGA 0xAC
+#define TOKEN_L_PHAT 0xAD
+#define TOKEN_L_CHI 0xAE
+#define TOKEN_L_STAT_F 0xAF
+#define TOKEN_LA 0xB0
+#define TOKEN_LB 0xB1
+#define TOKEN_LC 0xB2
+#define TOKEN_LD 0xB3
+#define TOKEN_L_SMALL_E 0xB4
+#define TOKEN_LF 0xB5
+#define TOKEN_L_SMALL_G 0xB6
+#define TOKEN_LH 0xB7
+#define TOKEN_LI 0xB8
+#define TOKEN_LJ 0xB9
+#define TOKEN_LK 0xBA
+#define TOKEN_LL 0xBC
+#define TOKEN_LM 0xBD
+#define TOKEN_L_SMALL_N 0xBE
+#define TOKEN_LO 0xBF
+#define TOKEN_LP 0xC0
+#define TOKEN_LQ 0xC1
+#define TOKEN_L_SMALL_R 0xC2
+#define TOKEN_LS 0xC3
+#define TOKEN_L_SMALL_T 0xC4
+#define TOKEN_LU 0xC5
+#define TOKEN_LV 0xC6
+#define TOKEN_LW 0xC7
+#define TOKEN_LX 0xC8
+#define TOKEN_LY 0xC9
+#define TOKEN_LZ 0xCA
+#define TOKEN_L_SIGMA 0xCB
+#define TOKEN_L_TAU 0xCC
+#define TOKEN_LCAP_I_ACUTE 0xCD
+#define TOKEN_GARBAGEC 0xCE
+#define TOKEN_TILDE 0xCF
+#define TOKEN_RESERVED 0xD0
+#define TOKEN_AT_SIGN 0xD1
+#define TOKEN_POUND 0xD2
+#define TOKEN_DOLLAR 0xD3
+#define TOKEN_AMPERSAND 0xD4
+#define TOKEN_BACK_QUOTE 0xD5
+#define TOKEN_SEMICOLON 0xD6
+#define TOKEN_BACK_SLASH 0xD7
+#define TOKEN_VERT_SLASH 0xD8
+#define TOKEN_UNDERSCORE 0xD9
+#define TOKEN_PERCENT 0xDA
+#define TOKEN_LAST_TOKEN 0xDA
+#define TOKEN_INVALID 0xDB
+
+#endif

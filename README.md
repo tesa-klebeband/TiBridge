@@ -4,6 +4,7 @@
 ![GitHub License](https://img.shields.io/github/license/tesa-klebeband/TiBridge)
 ![GitHub Repo stars](https://img.shields.io/github/stars/tesa-klebeband/TiBridge?style=flat)
 ![GitHub forks](https://img.shields.io/github/forks/tesa-klebeband/TiBridge?style=flat)
+
 TiBridge is an easy-to-use library that allows for communication between a Microcontroller like the ESP32 and TI Graphing Calculator
 
 ## Features

@@ -1,6 +1,6 @@
 {
   "name": "TiBridge",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "TiBridge is an easy-to-use library that allows for communication between a Microcontroller like the ESP32 and TI Graphing Calculator",
   "repository":
   {
